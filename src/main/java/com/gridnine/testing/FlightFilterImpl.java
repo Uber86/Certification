@@ -40,7 +40,7 @@ public class FlightFilterImpl implements FlightFilter{
             int totalGroundMinutes = 0;
             for (int i = 1; i < segments.size(); i++) {
                 LocalDateTime prevArrival = segments.get(i - 1).getArrivalDate();
-                LocalDateTime nextDeparture = segments.get(i).getArrivalDate();
+                LocalDateTime nextDeparture = segments.get(i).getDepartureDate();
                 totalGroundMinutes += (int) Duration.between(prevArrival, nextDeparture).toMinutes();
             }
             return totalGroundMinutes <= maxGroundMinutes;
