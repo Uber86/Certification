@@ -5,6 +5,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Реализация интерфейса {@link FlightFilter} с конкретными
+ * правилами фильтрации перелётов
+ */
 public class FlightFilterImpl implements FlightFilter{
 
     @Override
@@ -20,7 +24,7 @@ public class FlightFilterImpl implements FlightFilter{
     @Override
     public List<Flight> filterArrivalBeforeDeparture(List<Flight> flights) {
         return flights.stream().filter(it->it.getSegments().stream()
-                .noneMatch(segment -> segment.getDepartureDate()
+                .allMatch(segment -> !segment.getArrivalDate()
                         .isBefore(segment.getDepartureDate())))
                 .collect(Collectors.toList());
     }
